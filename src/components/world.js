@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
-import Player from './player';
+import Player from './Player';
+import PlayerStore from '../stores/PlayerStore';
+import PlayerActions from '../actions/PlayerActions';
+import {Container} from 'flux/utils';
 
 import '../css/main.css'
 
-export default class World extends Component {
-    constructor() {
-        super()
+class World extends Component {
+    static getStores() {
+        return [PlayerStore];
+    }
 
-        this.state = {
-            player: {
-                x: 0,
-                y: 0,
-            },
+    static calculateState(prevState) {
+        return {
+            ...PlayerStore.getState(),
         };
     }
     
     playerMove = (key) => {
         switch(key){
             case 'w': 
-                this.setState({...this.state, player: {...this.state.player, y: this.state.player.y - 5}});
+                PlayerActions.move('up');
                 break;
             case 'a':
-                this.setState({...this.state, player: {...this.state.player, x: this.state.player.x - 5}});
+                PlayerActions.move('left');
                 break;
             case 's':
-                this.setState({...this.state, player: {...this.state.player, y: this.state.player.y + 5}});
+                PlayerActions.move('down');
                 break;
             case 'd':
-                this.setState({...this.state, player: {...this.state.player, x: this.state.player.x + 5}});
+                PlayerActions.move('right');
                 break;
             default:
                 break;
@@ -37,8 +39,10 @@ export default class World extends Component {
     render() {
         return (
             <div className="world">
-                <Player x={this.state.player.x} y={this.state.player.y} movementFunc={this.playerMove} />
+                <Player x={this.state.spritePosition.left} y={this.state.spritePosition.top} movementFunc={this.playerMove} frame={this.state.frame}/>
             </div>
         );
     }
 }
+
+export default Container.create(World);
