@@ -6,17 +6,16 @@ import PlayerActions from '../actions/PlayerActions';
 import '../css/main.css';
 
 export default class Player extends Component {
+    listener;
     componentDidMount() {
-        window.addEventListener('keydown', (event) => {
+        this.listener = window.addEventListener('keydown', (event) => {
             this.props.movementFunc(event.key);
             this.updateSprite();
         });
     }
 
     componentWillUnmount() {
-        window.removeEventListener('keydown', (event) => {
-            this.props.movementFunc(event.key);
-        });
+        window.removeEventListener('keydown', this.listener);
     }
 
     updateSprite = () => {
