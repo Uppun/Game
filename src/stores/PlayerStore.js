@@ -17,16 +17,16 @@ class PlayerStore extends ReduceStore {
             case ActionTypes.MOVE: {
                 switch (action.direction) {
                     case 'left': {
-                        return {...state, spritePosition: {top: state.spritePosition.top, left: state.spritePosition.left - 5}, spriteDirection: 'left'};
+                        return {...state, spritePosition: {top: state.spritePosition.top, left: state.spritePosition.left - 2}, spriteDirection: 'left'};
                     }
                     case 'right': {
-                        return {...state, spritePosition: {top: state.spritePosition.top, left: state.spritePosition.left + 5}, spriteDirection: 'right'};
+                        return {...state, spritePosition: {top: state.spritePosition.top, left: state.spritePosition.left + 2}, spriteDirection: 'right'};
                     }
                     case 'up': {
-                        return {...state, spritePosition: {top: state.spritePosition.top - 5, left: state.spritePosition.left}, spriteDirection: 'up'};
+                        return {...state, spritePosition: {top: state.spritePosition.top - 2, left: state.spritePosition.left}, spriteDirection: 'up'};
                     }
                     case 'down': {
-                        return {...state, spritePosition: {top: state.spritePosition.top + 5, left: state.spritePosition.left}, spriteDirection: 'down'};
+                        return {...state, spritePosition: {top: state.spritePosition.top + 2, left: state.spritePosition.left}, spriteDirection: 'down'};
                     }
                     default: {
                         break;
