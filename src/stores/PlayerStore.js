@@ -9,7 +9,7 @@ class PlayerStore extends ReduceStore {
     }
 
     getInitialState() {
-        return {spritePosition: {top: 0, left: 0}, frame: 1};
+        return {spritePosition: {top: 0, left: 0}, frame: 1, spriteDirection: 'left'};
     }
 
     reduce(state, action) {
@@ -17,16 +17,16 @@ class PlayerStore extends ReduceStore {
             case ActionTypes.MOVE: {
                 switch (action.direction) {
                     case 'left': {
-                        return {...state, spritePosition: {top: state.spritePosition.top, left: state.spritePosition.left - 5}};
+                        return {...state, spritePosition: {top: state.spritePosition.top, left: state.spritePosition.left - 5}, spriteDirection: 'left'};
                     }
                     case 'right': {
-                        return {...state, spritePosition: {top: state.spritePosition.top, left: state.spritePosition.left + 5}};
+                        return {...state, spritePosition: {top: state.spritePosition.top, left: state.spritePosition.left + 5}, spriteDirection: 'right'};
                     }
                     case 'up': {
-                        return {...state, spritePosition: {top: state.spritePosition.top - 5, left: state.spritePosition.left}};
+                        return {...state, spritePosition: {top: state.spritePosition.top - 5, left: state.spritePosition.left}, spriteDirection: 'up'};
                     }
                     case 'down': {
-                        return {...state, spritePosition: {top: state.spritePosition.top + 5, left: state.spritePosition.left}};
+                        return {...state, spritePosition: {top: state.spritePosition.top + 5, left: state.spritePosition.left}, spriteDirection: 'down'};
                     }
                     default: {
                         break;
@@ -35,7 +35,7 @@ class PlayerStore extends ReduceStore {
                 break; 
             }
             case ActionTypes.ANIMATEP: {
-                if(state.frame === Sprites.squares.frames) {
+                if(state.frame === Sprites[action.name][state.spriteDirection].frames) {
                     return {...state, frame: 1};
                 }
 

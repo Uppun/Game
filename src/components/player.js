@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import square from '../assets/AnimationData/squares';
+import Assets from '../assets/AnimationData';
 import AnimateTimer from '../Helper/AnimateTimer';
 import PlayerActions from '../actions/PlayerActions';
 
@@ -20,18 +20,28 @@ export default class Player extends Component {
 
     updateSprite = () => {
         AnimateTimer.checkAnimate(() => {
-            PlayerActions.animatePlayer();
-        });
+            PlayerActions.animatePlayer(this.props.name);
+        }, 500);
+    }
+
+    calculateSprite = (sprite) => {
+        const result = {};
+        
+        result.y = sprite.startingPoint.top;
+        result.x = sprite.startingPoint.left - (sprite.width * (this.props.frame - 1));
+        return result; 
     }
 
     render() {
+        const playerSprite = Assets[this.props.name][this.props.direction];
+        const spritePos = this.calculateSprite(playerSprite);
         const style = {   top: this.props.y, 
             left: this.props.x, 
-            backgroundImage: square.backgroundImage, 
-            width: square.width, 
-            height: square.height, 
-            backgroundPositionX: (square.width * (this.props.frame - 1)), 
-            backgroundPositionY: 0};
+            backgroundImage: playerSprite.backgroundImage, 
+            width: playerSprite.width, 
+            height: playerSprite.height, 
+            backgroundPositionX: spritePos.x, 
+            backgroundPositionY: spritePos.y};
 
         return (
             <div className="player" style={style}/>

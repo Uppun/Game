@@ -39,7 +39,12 @@ class World extends Component {
     render() {
         return (
             <div className="world">
-                <Player x={this.state.spritePosition.left} y={this.state.spritePosition.top} movementFunc={this.playerMove} frame={this.state.frame}/>
+                <Player x={this.state.spritePosition.left} 
+                        y={this.state.spritePosition.top} 
+                        movementFunc={this.playerMove} 
+                        frame={this.state.frame} 
+                        name={'nyaru'} 
+                        direction={this.state.spriteDirection}/>
             </div>
         );
     }

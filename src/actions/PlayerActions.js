@@ -9,9 +9,10 @@ export default {
         })
     },
 
-    animatePlayer() {
+    animatePlayer(name) {
         Dispatcher.dispatch({
             type: ActionTypes.ANIMATEP,
+            name,
         })
     }
 }

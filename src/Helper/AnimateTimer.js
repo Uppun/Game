@@ -1,12 +1,12 @@
 class AnimateTimer {
     canAnimate = true;
 
-    checkAnimate(cb) {
+    checkAnimate(cb, time) {
         if(this.canAnimate) {
             this.canAnimate = false;
             setTimeout(() => {
                 this.canAnimate = true;
-            }, 750);
+            }, time);
             cb();
         }
     }   
