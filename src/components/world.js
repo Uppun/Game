@@ -36,6 +36,10 @@ class World extends Component {
         }
     }
 
+    start = () => {
+        this.props.startBattle();
+    }
+
     render() {
         return (
             <div className="world">
@@ -45,6 +49,7 @@ class World extends Component {
                         frame={this.state.frame} 
                         name={'nyaru'} 
                         direction={this.state.spriteDirection}/>
+                <button className="start" onClick={this.start}>Battle</button>
             </div>
         );
     }

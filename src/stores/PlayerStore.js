@@ -43,7 +43,7 @@ class PlayerStore extends ReduceStore {
             }
             
             default: {
-                break;
+                return state;
             }
         }
     }
